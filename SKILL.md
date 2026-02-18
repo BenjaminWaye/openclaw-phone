@@ -8,9 +8,23 @@ homepage: https://api.callmycall.com
 
 This skill helps you operate CallMyCall from chat. It is pull based (no webhook callbacks): you start a call, store the returned call ID in state, and later fetch status and results on demand.
 
+## API Key Resolution (OpenClaw best practice)
+
+Resolve credentials in this order:
+
+1. Environment variable: `CALLMYCALL_API_KEY` (preferred)
+2. OpenClaw user config: `~/.openclaw/openclaw.json` under `skills.callmycall-openclaw.apiKey`
+3. If still missing, prompt user once for the key and ask permission to persist it in `~/.openclaw/openclaw.json`
+
+Persistence rules:
+
+- Never store API keys in `SKILL.md`, examples, references, or memory/state files.
+- Do not write API keys into `recent_calls` or any conversation-visible output.
+- If user declines persistence, use the provided key for the current task only.
+
 ## How This Skill Should Work
 
-1. If no API key is stored, ask the user to paste one.
+1. Resolve API key using the order in "API Key Resolution (OpenClaw best practice)".
 2. Collect required call info using a layered gating flow (below).
 3. Present a short review summary and ask for confirmation.
 4. On confirmation, call `POST /v1/start-call`.
@@ -24,7 +38,7 @@ Send the API key in the Authorization header:
 Authorization: Bearer YOUR_API_KEY
 ```
 
-Never echo the API key back to the user.
+Never echo the API key back to the user or include it in logs/summaries.
 
 ## Stateful Calls List (required)
 
