@@ -7,7 +7,7 @@ User:
 
 Expected behavior:
 - Resolve API key from `CALLMYCALL_API_KEY`, then `~/.openclaw/openclaw.json` (`skills.openclaw-phone.apiKey`), and only then prompt once with confirmation before persisting.
-- Use layered gating to collect any missing details (language, voice, call brief).
+- Use layered gating to collect any missing details (language, call brief).
 - Present a review summary and ask for confirmation.
 - Call `POST /v1/start-call` with `phone_number` and `task`.
 - Save the returned `sid` in `recent_calls`.

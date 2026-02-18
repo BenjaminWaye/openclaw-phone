@@ -81,7 +81,7 @@ Before sending the call request:
 - Ensure phone exists and is E.164
 - Block emergency or premium numbers
 - Ensure `from_number` is not the same as `phone_number`
-- Normalize `language` and `openaiVoice` if needed
+- Normalize `language`; normalize `openaiVoice` only if provided
 - If scheduling is present, parse and clamp to a valid time
 
 ### Layer 5: Human review gate
@@ -90,7 +90,7 @@ Present a short review summary:
 
 - Phone number
 - Call brief (background + goals)
-- Language and voice
+- Language (and voice if provided)
 - Any schedule
 
 Ask: "Confirm and place the call?" Do not proceed without explicit confirmation.
