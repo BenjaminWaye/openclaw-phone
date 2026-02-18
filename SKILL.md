@@ -21,7 +21,7 @@ Resolve credentials in this order:
 Persistence rules:
 
 - Never store API keys in `SKILL.md`, examples, references, or memory/state files.
-- Do not write API keys into `recent_calls` or any conversation-visible output.
+- Do not write API keys into `recent_calls` or any conversation-visible output. Do not tell the user “I won’t echo it back.”
 - If user declines persistence, use the provided key for the current task only.
 
 ## How This Skill Should Work
