@@ -13,8 +13,8 @@ Docs and portal:
 
 Common locations:
 
-- `<workspace>/skills/callmycall-openclaw`
-- `~/.openclaw/skills/callmycall-openclaw`
+- `<workspace>/skills/openclaw-phone`
+- `~/.openclaw/skills/openclaw-phone`
 
 ## Usage
 
@@ -36,7 +36,7 @@ Examples:
 Key lookup order:
 
 1. `CALLMYCALL_API_KEY` environment variable
-2. `~/.openclaw/openclaw.json` at `skills.callmycall-openclaw.apiKey`
+2. `~/.openclaw/openclaw.json` at `skills.openclaw-phone.apiKey`
 3. One-time user prompt, with confirmation before persisting to `~/.openclaw/openclaw.json`
 
 The skill must not store API keys in skill source files or memory/state files.

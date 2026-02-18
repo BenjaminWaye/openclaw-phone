@@ -6,7 +6,7 @@ User:
 "Call +46700000000 and confirm my appointment for Tuesday at 2pm."
 
 Expected behavior:
-- Resolve API key from `CALLMYCALL_API_KEY`, then `~/.openclaw/openclaw.json` (`skills.callmycall-openclaw.apiKey`), and only then prompt once with confirmation before persisting.
+- Resolve API key from `CALLMYCALL_API_KEY`, then `~/.openclaw/openclaw.json` (`skills.openclaw-phone.apiKey`), and only then prompt once with confirmation before persisting.
 - Use layered gating to collect any missing details (language, voice, call brief).
 - Present a review summary and ask for confirmation.
 - Call `POST /v1/start-call` with `phone_number` and `task`.

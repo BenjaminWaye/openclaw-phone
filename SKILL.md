@@ -1,5 +1,5 @@
 ---
-name: callmycall-openclaw
+name: openclaw-phone
 description: Use CallMyCall API to start, end, and check AI phone calls, and return results in chat. Use when the user asks to call someone, schedule a call, end a call, or fetch call results.
 homepage: https://api.callmycall.com
 ---
@@ -13,7 +13,7 @@ This skill helps you operate CallMyCall from chat. It is pull based (no webhook 
 Resolve credentials in this order:
 
 1. Environment variable: `CALLMYCALL_API_KEY` (preferred)
-2. OpenClaw user config: `~/.openclaw/openclaw.json` under `skills.callmycall-openclaw.apiKey`
+2. OpenClaw user config: `~/.openclaw/openclaw.json` under `skills.openclaw-phone.apiKey`
 3. If still missing, prompt user once for the key and ask permission to persist it in `~/.openclaw/openclaw.json`
 
 Persistence rules:
