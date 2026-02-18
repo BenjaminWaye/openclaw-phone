@@ -63,7 +63,6 @@ Do not finalize a task until all required fields exist:
 
 - `phone_number`
 - `language`
-- `openaiVoice`
 - `call_brief` (background + goals)
 
 ### Layer 2: Task gap analysis
