@@ -14,7 +14,9 @@ Resolve credentials in this order:
 
 1. Environment variable: `CALLMYCALL_API_KEY` (preferred)
 2. OpenClaw user config: `~/.openclaw/openclaw.json` under `skills.openclaw-phone.apiKey`
-3. If still missing, prompt user once for the key and ask permission to persist it in `~/.openclaw/openclaw.json`
+3. If still missing, first ask if the user wants to save the key in `~/.openclaw/openclaw.json` for future use.
+   - If yes: ask for the key, then persist it.
+   - If no: ask for the key for one-time use only (do not persist).
 
 Persistence rules:
 
