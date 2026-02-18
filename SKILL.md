@@ -101,11 +101,21 @@ Ask: "Confirm and place the call?" Do not proceed without explicit confirmation.
 ### Start a Call
 
 1. Collect required fields using the layered gating flow.
-2. Call `POST /v1/start-call`.
-3. Store the returned `sid` in `recent_calls`.
-4. Reply with confirmation and the call ID.
+2. If a schedule/time is requested, follow **Scheduled Calls** below instead of calling the API immediately.
+3. Otherwise call `POST /v1/start-call`.
+4. Store the returned `sid` in `recent_calls`.
+5. Reply with confirmation and the call ID.
 
-If the user asks to schedule a call for later, include the schedule in the task or decline if scheduling is not supported by the API.
+### Scheduled Calls (OpenClaw-side)
+
+Because the API has no scheduling field, schedule via OpenClaw:
+
+1. Collect all required fields now.
+2. Save a compact call plan in skill state (phone, brief, language/voice, any options).
+3. Create a `cron` job at the target time that runs an `agentTurn` to place the call.
+4. At fire time, load the stored plan, call `POST /v1/start-call`, store the `sid`, and report back with call IDs.
+
+If the user asks to schedule a call for later, schedule it on the OpenClaw side (cron) since the API does not support scheduling. Collect all required fields now, store a compact call plan in state, and create a cron job to execute `start-call` at the target time. At fire time, place the call and report back with call IDs.
 
 ### List Recent Calls
 
