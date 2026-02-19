@@ -1,4 +1,4 @@
-# CallMyCall OpenClaw Skill
+# Phone OpenClaw Skill
 
 Focused OpenClaw skill for operating the CallMyCall API from chat.
 
