@@ -82,7 +82,7 @@ Before sending the call request:
 - Ensure phone exists and is E.164
 - Block emergency or premium numbers
 - Ensure `from_number` is not the same as `phone_number`
-- Normalize `language`; normalize `openaiVoice` only if provided
+- Normalize `language`; normalize voice fields (`genderVoice`, `openaiVoice`) only if provided
 - If scheduling is present, parse and clamp to a valid time
 
 ### Layer 5: Human review gate
