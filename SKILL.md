@@ -82,7 +82,11 @@ Before sending the call request:
 - Ensure phone exists and is E.164
 - Block emergency or premium numbers
 - Ensure `from_number` is not the same as `phone_number`
-- Normalize `language`; normalize `openaiVoice` only if provided
+- If `from_number` is requested, run caller-ID preflight:
+  1. `GET /v1/verified-caller-ids`
+  2. Confirm requested `from_number` exists in `verified_caller_ids`
+  3. If not verified: do **not** place call yet; ask user whether to continue with default caller ID or verify first
+- Normalize `language`; normalize voice fields (`genderVoice`, `openaiVoice`) only if provided
 - If scheduling is present, parse and clamp to a valid time
 
 ### Layer 5: Human review gate
@@ -101,10 +105,14 @@ Ask: "Confirm and place the call?" Do not proceed without explicit confirmation.
 ### Start a Call
 
 1. Collect required fields using the layered gating flow.
-2. If a schedule/time is requested, follow **Scheduled Calls** below instead of calling the API immediately.
-3. Otherwise call `POST /v1/start-call`.
-4. Store the returned `sid` in `recent_calls`.
-5. Reply with confirmation and the call ID.
+2. If `from_number` is provided, run caller-ID preflight via `GET /v1/verified-caller-ids`.
+3. If requested `from_number` is not verified, ask user to choose:
+   - continue now with default caller ID, or
+   - verify number first (`POST /v1/verify-caller-id`, then `GET /v1/verification-status/:verificationId`).
+4. If a schedule/time is requested, follow **Scheduled Calls** below instead of calling the API immediately.
+5. Otherwise call `POST /v1/start-call`.
+6. Store the returned `sid` in `recent_calls`.
+7. Reply with confirmation and the call ID.
 
 ### Scheduled Calls (OpenClaw-side)
 
