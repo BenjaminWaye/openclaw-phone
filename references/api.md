@@ -30,6 +30,7 @@ Request body (JSON):
 | task | string | Yes | What the AI should do |
 | language | string | No | `sv`, `en`, `de`, etc. |
 | tts_provider | string | No | `auto`, `openai`, `elevenlabs`, `azure` |
+| genderVoice | string | No | Preferred voice gender (for provider voice selection), e.g. `female`, `male`, `neutral` |
 | openaiVoice | string | No | OpenAI realtime voice name |
 | 11labsVoice | string | No | ElevenLabs voice ID |
 | elevenLabsVoice | string | No | Alias for `11labsVoice` |
