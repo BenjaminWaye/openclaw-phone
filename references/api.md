@@ -30,6 +30,7 @@ Request body (JSON):
 | task | string | Yes | What the AI should do |
 | language | string | No | `sv`, `en`, `de`, etc. |
 | tts_provider | string | No | `auto`, `openai`, `elevenlabs`, `azure` |
+| genderVoice | string | No | Preferred voice gender (for provider voice selection), e.g. `female`, `male`, `neutral` |
 | openaiVoice | string | No | OpenAI realtime voice name |
 | 11labsVoice | string | No | ElevenLabs voice ID |
 | elevenLabsVoice | string | No | Alias for `11labsVoice` |
@@ -119,16 +120,27 @@ Get call status and metadata.
 Auth: **Required**
 
 Response (JSON):
+
+The API may return either a flat call object **or** an envelope like:
+
+```json
+{ "call": { "status": "busy", "duration": "0", "...": "..." }, "transcripts": [] }
+```
+
+Read `status`/`duration` from:
+- flat: `status`, `duration`
+- envelope: `call.status`, `call.duration`
+
 | Field | Type | Notes |
 | --- | --- | --- |
-| sid | string | Call SID |
-| status | string | `queued`, `ringing`, `in-progress`, `completed`, `canceled`, `failed` |
-| direction | string | `outbound-api` or `inbound` |
-| from | string | Caller ID |
-| to | string | Destination number |
-| duration | number | Duration in seconds (if completed) |
-| recordingUrl | string | Present if recorded |
-| transcript | object | If available |
+| sid / call.call_id | string | Call SID |
+| status / call.status | string | `queued`, `ringing`, `in-progress`, `completed`, `canceled`, `failed`, `busy`, `no-answer` |
+| direction / call.direction | string | `outbound-api` or `inbound` |
+| from / call.from | string | Caller ID |
+| to / call.to | string | Destination number |
+| duration / call.duration | number\|string | Duration in seconds (if completed) |
+| recordingUrl / call.recording_url | string | Present if recorded |
+| transcript / transcripts | object\|array | If available |
 
 ---
 

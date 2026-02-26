@@ -131,6 +131,21 @@ If the user asks to schedule a call for later, schedule it on the OpenClaw side 
 2. For each call, fetch status via `GET /v1/calls/:callId` if needed.
 3. Display a numbered list.
 
+### Retry Until Answered (important)
+
+When the user asks to call repeatedly until answered:
+
+1. Place one call with `POST /v1/start-call`.
+2. Poll `GET /v1/calls/:callId` until terminal status.
+3. Treat response as either flat (`status`, `duration`) **or nested** (`call.status`, `call.duration`).
+4. If status is `busy`, `no-answer`, `failed`, or `canceled`, wait requested interval and place next call.
+5. Stop retry loop when:
+   - status is `in-progress`, or
+   - status is `completed` with `duration > 0`.
+6. Report each attempt (call ID + status) back to user.
+
+Implementation note: keep one base URL per run (`https://call-my-call-backend.fly.dev` preferred) and use it consistently for both start + status endpoints.
+
 ### End a Call
 
 If the user says "end the call" without specifying which, list recent calls and ask which one.
